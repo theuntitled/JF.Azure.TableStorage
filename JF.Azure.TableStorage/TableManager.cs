@@ -12,7 +12,14 @@ namespace JF.Azure.TableStorage {
 	/// </summary>
 	public abstract class TableManager : ITableManager {
 
+		/// <summary>
+		///     The actual cloud table client
+		/// </summary>
 		protected readonly CloudTableClient TableClient;
+
+		/// <summary>
+		///     The actual cloud storage account
+		/// </summary>
 		protected readonly CloudStorageAccount StorageAccount;
 
 		private readonly Type _iTableType = typeof (ITable<>);
@@ -61,6 +68,7 @@ namespace JF.Azure.TableStorage {
 			}
 		}
 
+		/// <summary />
 		public void Dispose() {
 		}
 

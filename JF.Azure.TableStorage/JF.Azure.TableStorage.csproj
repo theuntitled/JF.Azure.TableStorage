@@ -11,6 +11,7 @@
     <AssemblyName>JF.Azure.TableStorage</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>4914b528</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,6 +36,8 @@
     <ApplicationIcon>theuntitled.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Build.Framework" />
+    <Reference Include="Microsoft.Build.Utilities.v4.0" />
     <Reference Include="Microsoft.Data.Edm, Version=5.6.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Data.Edm.5.6.2\lib\net40\Microsoft.Data.Edm.dll</HintPath>
@@ -84,7 +87,18 @@
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
-  <Target Name="AfterBuild">
-  </Target>
   -->
+  <Target Name="AfterBuild">
+    <GetVersionNumber FileName="$(TargetPath)">
+      <Output TaskParameter="VersionString" ItemName="VersionString"></Output>
+    </GetVersionNumber>
+    <Exec Command="copy $(SolutionDir)nuspec.tpl $(SolutionDir)$(ProjectName).@(VersionString).nuspec" />
+  </Target>
+  <Import Project="..\packages\JF.Build.Tasks.1.0.0\build\JF.Build.Tasks.targets" Condition="Exists('..\packages\JF.Build.Tasks.1.0.0\build\JF.Build.Tasks.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\JF.Build.Tasks.1.0.0\build\JF.Build.Tasks.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JF.Build.Tasks.1.0.0\build\JF.Build.Tasks.targets'))" />
+  </Target>
 </Project>

@@ -5,6 +5,13 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JF.Azure.TableStorage", "JF.Azure.TableStorage\JF.Azure.TableStorage.csproj", "{6489B553-A273-4884-90DF-1AC8B01F9532}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4BB1ABAC-2E76-43EE-8302-537AB3FFBDC6}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE = LICENSE
+		nuspec.tpl = nuspec.tpl
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
